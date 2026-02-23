@@ -16,6 +16,8 @@ import {
   Megaphone,
   Loader2,
 } from "lucide-react";
+import { PlatformIcon } from "@/components/PlatformIcon";
+import type { Platform } from "@/lib/types";
 
 const FEATURES = [
   {
@@ -50,13 +52,13 @@ const FEATURES = [
   },
 ];
 
-const PLATFORMS = [
-  { emoji: "🐦", name: "Twitter/X" },
-  { emoji: "💼", name: "LinkedIn" },
-  { emoji: "📧", name: "Email" },
-  { emoji: "💬", name: "WhatsApp" },
-  { emoji: "📸", name: "Instagram" },
-  { emoji: "🎬", name: "Video Scripts" },
+const PLATFORMS: { platform: Platform; name: string }[] = [
+  { platform: "twitter", name: "Twitter/X" },
+  { platform: "linkedin", name: "LinkedIn" },
+  { platform: "email_subject", name: "Email" },
+  { platform: "whatsapp", name: "WhatsApp" },
+  { platform: "instagram", name: "Instagram" },
+  { platform: "video_script", name: "Video Scripts" },
 ];
 
 const PRICING = [
@@ -166,14 +168,14 @@ export default function Landing() {
           <div className="flex items-center justify-center gap-3">
             <button
               onClick={() => dispatch({ type: "SET_VIEW", view: "generate" })}
-              className="forge-gradient px-6 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 hover:opacity-90 transition-opacity"
+              className="btn-primary px-6 py-3 rounded-xl text-white font-semibold text-sm flex items-center gap-2 cursor-pointer"
             >
               Start Generating
               <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => dispatch({ type: "SET_VIEW", view: "dashboard" })}
-              className="px-6 py-3 rounded-xl text-slate-300 border border-slate-700 text-sm font-medium hover:border-slate-600 hover:text-white transition-all"
+              className="px-6 py-3 rounded-xl text-slate-300 border border-slate-700 text-sm font-medium hover:border-slate-600 hover:text-white transition-all cursor-pointer"
             >
               View Dashboard
             </button>
@@ -184,9 +186,9 @@ export default function Landing() {
             {PLATFORMS.map((p) => (
               <div
                 key={p.name}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700/50 text-xs text-slate-400"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-xs text-slate-400"
               >
-                <span>{p.emoji}</span>
+                <PlatformIcon platform={p.platform} size="xs" />
                 {p.name}
               </div>
             ))}
@@ -210,7 +212,7 @@ export default function Landing() {
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="glass-card rounded-2xl p-6 hover:border-forge-600/30 transition-all group"
+                className="interactive-card glass-card rounded-2xl p-6 transition-all group"
               >
                 <div className="w-10 h-10 rounded-xl bg-forge-600/10 flex items-center justify-center mb-4 group-hover:bg-forge-600/20 transition-colors">
                   <f.icon className="w-5 h-5 text-forge-400" />
@@ -327,9 +329,9 @@ export default function Landing() {
                       : dispatch({ type: "SET_VIEW", view: "generate" })
                   }
                   disabled={loadingPlan === plan.name}
-                  className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
+                  className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer ${
                     plan.highlight
-                      ? "forge-gradient text-white hover:opacity-90"
+                      ? "btn-primary text-white"
                       : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
                   } disabled:opacity-50`}
                 >
@@ -357,7 +359,7 @@ export default function Landing() {
           </p>
           <button
             onClick={() => dispatch({ type: "SET_VIEW", view: "products" })}
-            className="forge-gradient px-8 py-3.5 rounded-xl text-white font-semibold text-sm inline-flex items-center gap-2 hover:opacity-90 transition-opacity"
+              className="btn-primary forge-gradient px-8 py-3.5 rounded-xl text-white font-semibold text-sm inline-flex items-center gap-2 cursor-pointer"
           >
             <Sparkles className="w-4 h-4" />
             Get Started — It&apos;s Free

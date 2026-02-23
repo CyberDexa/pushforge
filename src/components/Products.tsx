@@ -70,14 +70,14 @@ export default function Products() {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-1">Products</h2>
+          <h2 className="text-2xl font-bold text-white mb-1 section-header">Products</h2>
           <p className="text-slate-400 text-sm">
             Your SaaS products to market
           </p>
         </div>
         <button
           onClick={() => { resetForm(); setShowForm(true); }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl forge-gradient text-white text-sm font-medium hover:opacity-90 transition-opacity"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl btn-primary text-white text-sm font-medium cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Add Product
@@ -86,13 +86,13 @@ export default function Products() {
 
       {/* Product Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="glass-card rounded-2xl w-full max-w-lg p-6 animate-slide-up">
+        <div className="modal-overlay flex items-center justify-center p-4">
+          <div className="glass-card-elevated rounded-2xl w-full max-w-lg p-6 animate-slide-up">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-bold text-white">
                 {editing ? "Edit Product" : "Add New Product"}
               </h3>
-              <button onClick={resetForm} className="text-slate-400 hover:text-white transition-colors">
+              <button onClick={resetForm} className="text-slate-400 hover:text-white transition-colors cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -136,7 +136,7 @@ export default function Products() {
                       key={val}
                       type="button"
                       onClick={() => setForm({ ...form, targetAudience: val })}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
                         form.targetAudience === val
                           ? "bg-forge-600/20 text-forge-400 border border-forge-600/30"
                           : "bg-slate-800/80 text-slate-400 border border-slate-700 hover:border-slate-600"
@@ -178,13 +178,13 @@ export default function Products() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="flex-1 px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-sm hover:bg-slate-700 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-sm hover:bg-slate-700 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2.5 rounded-xl forge-gradient text-white text-sm font-medium hover:opacity-90 transition-opacity"
+                  className="flex-1 px-4 py-2.5 rounded-xl btn-primary text-white text-sm font-medium cursor-pointer"
                 >
                   {editing ? "Save Changes" : "Add Product"}
                 </button>
@@ -196,14 +196,20 @@ export default function Products() {
 
       {/* Product Cards */}
       {state.products.length === 0 ? (
-        <div className="glass-card rounded-2xl p-10 text-center">
+        <div className="glass-card-elevated rounded-2xl p-10 text-center">
           <div className="w-14 h-14 rounded-2xl bg-forge-600/10 mx-auto flex items-center justify-center mb-4">
             <Plus className="w-7 h-7 text-forge-400" />
           </div>
           <h3 className="text-white font-semibold mb-2">No products yet</h3>
-          <p className="text-slate-400 text-sm max-w-sm mx-auto">
+          <p className="text-slate-400 text-sm max-w-sm mx-auto mb-4">
             Add your SaaS products to start generating marketing content
           </p>
+          <button
+            onClick={() => { resetForm(); setShowForm(true); }}
+            className="btn-primary px-5 py-2.5 rounded-xl text-white text-sm font-medium cursor-pointer"
+          >
+            Add Your First Product
+          </button>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -214,7 +220,7 @@ export default function Products() {
             return (
               <div
                 key={product.id}
-                className="glass-card rounded-2xl p-5 hover:border-slate-600/50 transition-all group"
+                className="interactive-card glass-card rounded-2xl p-5 transition-all group"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
@@ -240,13 +246,13 @@ export default function Products() {
                   <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => openEdit(product)}
-                      className="p-1.5 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-all"
+                      className="p-1.5 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-all cursor-pointer"
                     >
                       <Pencil className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => dispatch({ type: "DELETE_PRODUCT", id: product.id })}
-                      className="p-1.5 rounded-lg hover:bg-red-900/30 text-slate-400 hover:text-red-400 transition-all"
+                      className="p-1.5 rounded-lg hover:bg-red-900/30 text-slate-400 hover:text-red-400 transition-all cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -281,7 +287,7 @@ export default function Products() {
                   </span>
                   <button
                     onClick={() => dispatch({ type: "SET_VIEW", view: "generate" })}
-                    className="text-[11px] text-forge-400 hover:text-forge-300 font-medium transition-colors"
+                    className="text-[11px] text-forge-400 hover:text-forge-300 font-medium transition-colors cursor-pointer"
                   >
                     Generate →
                   </button>

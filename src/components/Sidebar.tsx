@@ -51,28 +51,31 @@ export default function Sidebar() {
   const { state, dispatch } = useStore();
 
   return (
-    <aside className="w-64 h-screen fixed left-0 top-0 z-30 flex flex-col border-r border-slate-800 bg-[#080B11]">
+    <aside className="w-64 h-screen fixed left-0 top-0 z-30 flex flex-col border-r border-slate-800/60 bg-[#070A10]/95 backdrop-blur-xl">
       {/* Logo */}
-      <div className="px-6 py-5 flex items-center gap-3">
-        <div className="w-9 h-9 rounded-lg forge-gradient flex items-center justify-center">
+      <div className="px-5 py-5 flex items-center gap-3">
+        <div className="w-9 h-9 rounded-xl forge-gradient flex items-center justify-center shadow-lg shadow-forge-600/20">
           <Flame className="w-5 h-5 text-white" />
         </div>
         <div>
-          <h1 className="text-lg font-bold tracking-tight text-white">
-            Push<span className="text-forge-500">Forge</span>
+          <h1 className="text-base font-bold tracking-tight text-white">
+            Push<span className="text-forge-400">Forge</span>
           </h1>
-          <p className="text-[10px] text-slate-500 tracking-widest uppercase">
+          <p className="text-[9px] text-slate-600 tracking-[0.15em] uppercase font-medium">
             Content Engine
           </p>
         </div>
       </div>
 
+      {/* Divider */}
+      <div className="mx-4 h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
+
       {/* Nav */}
-      <nav className="flex-1 px-3 mt-2 overflow-y-auto">
+      <nav className="flex-1 px-3 mt-3 overflow-y-auto">
         {navSections.map((section, si) => (
-          <div key={si} className={si > 0 ? "mt-4" : ""}>
+          <div key={si} className={si > 0 ? "mt-5" : ""}>
             {section.label && (
-              <p className="px-4 mb-1 text-[10px] font-semibold text-slate-600 uppercase tracking-wider">
+              <p className="px-3 mb-1.5 text-[9px] font-semibold text-slate-600 uppercase tracking-[0.12em]">
                 {section.label}
               </p>
             )}
@@ -82,14 +85,17 @@ export default function Sidebar() {
                 <button
                   key={view}
                   onClick={() => dispatch({ type: "SET_VIEW", view })}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all mb-0.5
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-[13px] font-medium transition-all mb-0.5 cursor-pointer relative
                     ${
                       isActive
-                        ? "bg-forge-600/15 text-forge-400 border border-forge-600/20"
-                        : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"
+                        ? "bg-forge-600/10 text-forge-400"
+                        : "text-slate-500 hover:text-slate-300 hover:bg-slate-800/40"
                     }`}
                 >
-                  <Icon className={`w-[18px] h-[18px] ${isActive ? "text-forge-400" : ""}`} />
+                  {isActive && (
+                    <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-4 rounded-r-full bg-forge-500" />
+                  )}
+                  <Icon className={`w-[16px] h-[16px] ${isActive ? "text-forge-400" : ""}`} />
                   {label}
                 </button>
               );
@@ -98,10 +104,16 @@ export default function Sidebar() {
         ))}
       </nav>
 
+      {/* Divider */}
+      <div className="mx-4 h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
+
       {/* Bottom stats */}
-      <div className="px-5 py-4 border-t border-slate-800">
-        <div className="flex justify-between text-xs text-slate-500">
-          <span>{state.products.length} products</span>
+      <div className="px-4 py-3.5">
+        <div className="flex justify-between text-[10px] text-slate-600">
+          <span className="flex items-center gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/70" />
+            {state.products.length} products
+          </span>
           <span>{state.generatedContent.length} generated</span>
         </div>
       </div>

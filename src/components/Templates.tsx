@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useStore } from "@/lib/store";
 import type { Template, Platform, Tone } from "@/lib/types";
-import { getPlatformLabel, getPlatformEmoji } from "@/lib/ai";
+import { getPlatformLabel } from "@/lib/ai";
+import { PlatformBadge, PlatformIcon } from "@/components/PlatformIcon";
 import {
-  FileText,
   Plus,
   Pencil,
   Trash2,
@@ -17,6 +17,7 @@ import {
   BookOpen,
   Wrench,
   Sparkles,
+  FileText,
 } from "lucide-react";
 
 function generateId() {
@@ -223,7 +224,7 @@ export default function TemplatesView() {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-1">Templates</h2>
+          <h2 className="text-2xl font-bold text-white mb-1 section-header">Templates</h2>
           <p className="text-slate-400 text-sm">Reusable content recipes for quick generation</p>
         </div>
         <button
@@ -313,8 +314,8 @@ export default function TemplatesView() {
 
               <div className="flex flex-wrap gap-1 mb-3">
                 {template.platforms.map((p) => (
-                  <span key={p} className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-500">
-                    {getPlatformEmoji(p)} {getPlatformLabel(p)}
+                  <span key={p} className="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded bg-slate-800/60 text-slate-500">
+                    <PlatformIcon platform={p} size="xs" /> {getPlatformLabel(p)}
                   </span>
                 ))}
               </div>
@@ -397,7 +398,7 @@ export default function TemplatesView() {
                           : "bg-slate-800/80 text-slate-400 border border-slate-700"
                       }`}
                     >
-                      {getPlatformEmoji(p)} {getPlatformLabel(p)}
+                      <PlatformIcon platform={p} size="xs" /> {getPlatformLabel(p)}
                     </button>
                   ))}
                 </div>

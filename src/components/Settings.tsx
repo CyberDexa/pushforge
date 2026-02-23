@@ -61,7 +61,7 @@ export default function SettingsView() {
   return (
     <div className="animate-fade-in max-w-2xl">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-1">Settings</h2>
+        <h2 className="text-2xl font-bold text-white mb-1 section-header">Settings</h2>
         <p className="text-slate-400 text-sm">
           Configure your AI provider, API keys, and brand voice
         </p>
@@ -77,7 +77,7 @@ export default function SettingsView() {
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => dispatch({ type: "SET_AI_PROVIDER", provider: "openai" })}
-            className={`p-4 rounded-xl text-left transition-all ${
+            className={`p-4 rounded-xl text-left transition-all cursor-pointer ${
               state.aiProvider === "openai"
                 ? "bg-forge-600/15 border border-forge-600/30"
                 : "bg-slate-800/80 border border-slate-700 hover:border-slate-600"
@@ -91,7 +91,7 @@ export default function SettingsView() {
 
           <button
             onClick={() => dispatch({ type: "SET_AI_PROVIDER", provider: "anthropic" })}
-            className={`p-4 rounded-xl text-left transition-all ${
+            className={`p-4 rounded-xl text-left transition-all cursor-pointer ${
               state.aiProvider === "anthropic"
                 ? "bg-forge-600/15 border border-forge-600/30"
                 : "bg-slate-800/80 border border-slate-700 hover:border-slate-600"
@@ -133,7 +133,7 @@ export default function SettingsView() {
         <div className="flex items-center gap-3">
           <button
             onClick={handleSave}
-            className="px-4 py-2 rounded-lg forge-gradient text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="px-4 py-2 rounded-lg btn-primary text-white text-sm font-medium"
           >
             Save Key
           </button>
@@ -278,7 +278,7 @@ export default function SettingsView() {
         <div className="flex items-center gap-3">
           <button
             onClick={saveBrandVoice}
-            className="px-4 py-2 rounded-lg forge-gradient text-white text-sm font-medium hover:opacity-90 transition-opacity"
+            className="px-4 py-2 rounded-lg btn-primary text-white text-sm font-medium"
           >
             Save Brand Voice
           </button>

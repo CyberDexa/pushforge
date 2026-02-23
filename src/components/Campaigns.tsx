@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useStore } from "@/lib/store";
-import { generateContent, getPlatformLabel, getPlatformEmoji } from "@/lib/ai";
+import { generateContent, getPlatformLabel } from "@/lib/ai";
 import type { Platform, Tone, Campaign, GeneratedContent } from "@/lib/types";
+import { PlatformBadge, PlatformIcon } from "@/components/PlatformIcon";
 import {
-  Megaphone,
   Plus,
   X,
   Loader2,
@@ -14,6 +14,7 @@ import {
   Play,
   ChevronDown,
   ChevronUp,
+  Megaphone,
 } from "lucide-react";
 
 function generateId() {
@@ -187,7 +188,7 @@ export default function CampaignsView() {
     <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-2xl font-bold text-white mb-1">Campaigns</h2>
+          <h2 className="text-2xl font-bold text-white mb-1 section-header">Campaigns</h2>
           <p className="text-slate-400 text-sm">
             Generate content across multiple products at once
           </p>
@@ -291,8 +292,8 @@ export default function CampaignsView() {
 
                   <div className="flex flex-wrap gap-1 mb-2">
                     {campaign.platforms.map((p) => (
-                      <span key={p} className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800/60 text-slate-500">
-                        {getPlatformEmoji(p)}
+                      <span key={p} className="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded bg-slate-800/60 text-slate-500">
+                        <PlatformIcon platform={p} size="xs" />
                       </span>
                     ))}
                   </div>
@@ -322,7 +323,7 @@ export default function CampaignsView() {
                             </span>
                             <span className="text-[10px] text-slate-600">•</span>
                             <span className="text-[10px] text-slate-500">
-                              {getPlatformEmoji(c.platform)} {getPlatformLabel(c.platform)}
+                              <PlatformIcon platform={c.platform} size="xs" /> {getPlatformLabel(c.platform)}
                             </span>
                           </div>
                           <p className="text-xs text-slate-400 whitespace-pre-wrap line-clamp-3">
@@ -417,7 +418,7 @@ export default function CampaignsView() {
                           : "bg-slate-800/80 text-slate-400 border border-slate-700"
                       }`}
                     >
-                      {getPlatformEmoji(p)} {getPlatformLabel(p)}
+                      <PlatformIcon platform={p} size="xs" /> {getPlatformLabel(p)}
                     </button>
                   ))}
                 </div>

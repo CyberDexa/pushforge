@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useStore } from "@/lib/store";
-import { getPlatformLabel, getPlatformEmoji } from "@/lib/ai";
+import { getPlatformLabel } from "@/lib/ai";
 import type { Platform } from "@/lib/types";
 import { Copy, Check, Trash2, Search, Filter } from "lucide-react";
+import { PlatformIcon } from "@/components/PlatformIcon";
 
 export default function HistoryView() {
   const { state, dispatch } = useStore();
@@ -34,7 +35,7 @@ export default function HistoryView() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-1">History</h2>
+        <h2 className="text-2xl font-bold text-white mb-1 section-header">History</h2>
         <p className="text-slate-400 text-sm">
           All your generated content in one place
         </p>
@@ -103,9 +104,7 @@ export default function HistoryView() {
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs">
-                      {getPlatformEmoji(c.platform)}
-                    </span>
+                    <PlatformIcon platform={c.platform} size="xs" />
                     <span className="text-xs font-medium text-slate-300">
                       {getPlatformLabel(c.platform)}
                     </span>

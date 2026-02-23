@@ -2,8 +2,9 @@
 
 import { useState, useMemo } from "react";
 import { useStore } from "@/lib/store";
-import { getPlatformLabel, getPlatformEmoji } from "@/lib/ai";
+import { getPlatformLabel } from "@/lib/ai";
 import type { Platform } from "@/lib/types";
+import { PlatformIcon } from "@/components/PlatformIcon";
 import {
   ChevronLeft,
   ChevronRight,
@@ -80,7 +81,7 @@ export default function CalendarView() {
   return (
     <div className="animate-fade-in">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-white mb-1">Content Calendar</h2>
+        <h2 className="text-2xl font-bold text-white mb-1 section-header">Content Calendar</h2>
         <p className="text-slate-400 text-sm">Plan and track your content schedule</p>
       </div>
 
@@ -154,7 +155,7 @@ export default function CalendarView() {
                       >
                         <div className={`w-1.5 h-1.5 rounded-full ${statusColors[c.status || "draft"]}`} />
                         <span className="text-[8px] text-slate-500 truncate">
-                          {getPlatformEmoji(c.platform)}
+                          <PlatformIcon platform={c.platform} size="xs" />
                         </span>
                       </div>
                     ))}
@@ -216,7 +217,7 @@ export default function CalendarView() {
                   <div key={c.id} className="glass-card rounded-xl p-4 group">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs">{getPlatformEmoji(c.platform)}</span>
+                        <PlatformIcon platform={c.platform} size="xs" />
                         <span className="text-xs font-medium text-slate-300">
                           {getPlatformLabel(c.platform)}
                         </span>

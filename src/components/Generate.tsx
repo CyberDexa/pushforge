@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useStore } from "@/lib/store";
-import { generateContent, getPlatformLabel, getPlatformEmoji } from "@/lib/ai";
+import { generateContent, getPlatformLabel } from "@/lib/ai";
 import type { Platform, GeneratedContent } from "@/lib/types";
 import { Sparkles, Copy, Check, Loader2, AlertTriangle, Calendar, GitBranch, Share2, MessageCircle } from "lucide-react";
+import { PlatformBadge, PlatformIcon } from "@/components/PlatformIcon";
 
 const ALL_PLATFORMS: Platform[] = [
   "twitter",
@@ -186,7 +187,7 @@ export default function Generate() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-1">
+        <h2 className="text-2xl font-bold text-white mb-1 section-header">
           Generate Content
         </h2>
         <p className="text-slate-400 text-sm">
@@ -251,18 +252,13 @@ export default function Generate() {
             </label>
             <div className="flex flex-wrap gap-2">
               {ALL_PLATFORMS.map((p) => (
-                <button
+                <PlatformBadge
                   key={p}
+                  platform={p}
+                  label={getPlatformLabel(p)}
+                  selected={selectedPlatforms.includes(p)}
                   onClick={() => togglePlatform(p)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                    selectedPlatforms.includes(p)
-                      ? "bg-forge-600/20 text-forge-400 border border-forge-600/30"
-                      : "bg-slate-800/80 text-slate-400 border border-slate-700 hover:border-slate-600"
-                  }`}
-                >
-                  <span>{getPlatformEmoji(p)}</span>
-                  {getPlatformLabel(p)}
-                </button>
+                />
               ))}
             </div>
           </div>
@@ -375,7 +371,7 @@ export default function Generate() {
           <button
             onClick={handleGenerate}
             disabled={loading || !hasApiKey}
-            className="w-full py-3.5 rounded-xl forge-gradient text-white font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3.5 rounded-xl forge-gradient text-white font-semibold text-sm flex items-center justify-center gap-2 btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>
@@ -421,13 +417,11 @@ export default function Generate() {
           {Object.entries(results).map(([platform, content]) => (
             <div
               key={platform}
-              className="glass-card rounded-2xl p-5 animate-slide-up"
+              className="glass-card rounded-2xl p-5 animate-slide-up hover:border-slate-600/50"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm">
-                    {getPlatformEmoji(platform as Platform)}
-                  </span>
+                  <PlatformIcon platform={platform as Platform} size="sm" showBg />
                   <span className="text-xs font-semibold text-slate-300">
                     {getPlatformLabel(platform as Platform)}
                   </span>
@@ -498,7 +492,7 @@ export default function Generate() {
                     <div key={key} className="glass-card rounded-xl p-4">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs">{getPlatformEmoji(platform as Platform)}</span>
+                          <PlatformIcon platform={platform as Platform} size="xs" />
                           <span className="text-xs font-medium text-slate-300">
                             {getPlatformLabel(platform as Platform)}
                           </span>

@@ -237,7 +237,7 @@ export default function VideoStudio() {
   return (
     <div className="animate-fade-in">
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-white mb-1">Video Studio</h2>
+        <h2 className="text-2xl font-bold text-white mb-1 section-header">Video Studio</h2>
         <p className="text-slate-400 text-sm">
           Turn scripts into voiceovers and talking-head videos
         </p>
@@ -285,7 +285,7 @@ export default function VideoStudio() {
           <div className="flex gap-2">
             <button
               onClick={() => setTab("voiceover")}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 tab === "voiceover"
                   ? "bg-forge-600/15 text-forge-400 border border-forge-600/30"
                   : "bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-600"
@@ -296,7 +296,7 @@ export default function VideoStudio() {
             </button>
             <button
               onClick={() => setTab("talking_head")}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                 tab === "talking_head"
                   ? "bg-forge-600/15 text-forge-400 border border-forge-600/30"
                   : "bg-slate-800/50 text-slate-400 border border-slate-700 hover:border-slate-600"
@@ -326,7 +326,6 @@ export default function VideoStudio() {
                   <option value="">Load from history...</option>
                   {videoScripts.map((s) => (
                     <option key={s.id} value={s.id}>
-                      🎬{" "}
                       {s.content.slice(0, 50).replace(/\n/g, " ")}...
                     </option>
                   ))}
@@ -371,7 +370,7 @@ export default function VideoStudio() {
                           ? setSelectedVoice(v.id)
                           : setSelectedDIDVoice(v.id)
                       }
-                      className={`px-3 py-2.5 rounded-xl text-left transition-all ${
+                      className={`px-3 py-2.5 rounded-xl text-left transition-all cursor-pointer ${
                         selected
                           ? "bg-forge-600/15 border border-forge-600/30"
                           : "bg-slate-800/50 border border-slate-700 hover:border-slate-600"
@@ -396,7 +395,7 @@ export default function VideoStudio() {
           <button
             onClick={tab === "voiceover" ? handleVoiceover : handleTalkingHead}
             disabled={loading}
-            className="w-full py-3.5 rounded-xl forge-gradient text-white font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="w-full py-3.5 rounded-xl btn-primary text-white font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
           >
             {loading ? (
               <>
@@ -432,7 +431,7 @@ export default function VideoStudio() {
               <div className="flex items-center gap-4">
                 <button
                   onClick={toggleAudio}
-                  className="w-12 h-12 rounded-xl forge-gradient flex items-center justify-center hover:opacity-90 transition-opacity"
+                  className="w-12 h-12 rounded-xl forge-gradient flex items-center justify-center hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   {isPlaying ? (
                     <Pause className="w-5 h-5 text-white" />
@@ -538,7 +537,7 @@ export default function VideoStudio() {
                         onClick={() =>
                           dispatch({ type: "DELETE_VIDEO_JOB", id: job.id })
                         }
-                        className="p-1 rounded-lg bg-slate-800 text-slate-500 hover:text-red-400 hover:bg-red-900/20 transition-all"
+                        className="p-1 rounded-lg bg-slate-800 text-slate-500 hover:text-red-400 hover:bg-red-900/20 transition-all cursor-pointer"
                         title="Delete"
                       >
                         <Trash2 className="w-3 h-3" />
