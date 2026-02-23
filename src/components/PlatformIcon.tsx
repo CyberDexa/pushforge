@@ -72,11 +72,31 @@ export function PlatformBadge({
     <button
       type="button"
       onClick={onClick}
-      className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer ${
-        selected
-          ? "bg-forge-600/15 text-forge-400 border border-forge-600/30"
-          : "bg-slate-800/60 text-slate-400 border border-slate-700/60 hover:border-slate-600 hover:text-slate-300"
-      }`}
+      className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all cursor-pointer"
+      style={selected ? {
+        background: "linear-gradient(135deg, rgba(249,115,22,0.18) 0%, rgba(234,88,12,0.10) 100%)",
+        border: "1px solid rgba(249,115,22,0.35)",
+        color: "#fb923c",
+        boxShadow: "0 0 10px rgba(249,115,22,0.1)",
+      } : {
+        background: "rgba(255,255,255,0.04)",
+        border: "1px solid rgba(255,255,255,0.09)",
+        color: "rgba(148,163,184,0.7)",
+      }}
+      onMouseEnter={(e) => {
+        if (!selected) {
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+          e.currentTarget.style.color = "#cbd5e1";
+          e.currentTarget.style.background = "rgba(255,255,255,0.065)";
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!selected) {
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.09)";
+          e.currentTarget.style.color = "rgba(148,163,184,0.7)";
+          e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+        }
+      }}
     >
       <PlatformIcon platform={platform} size="xs" />
       {label}

@@ -63,8 +63,10 @@ function AppContent() {
   return (
     <div className="min-h-screen">
       <Sidebar />
-      <main style={{ marginLeft: "16rem", padding: "2rem", maxWidth: "72rem" }}>
-        {renderView()}
+      <main className="ml-64 min-h-screen">
+        <div className="max-w-5xl px-8 py-8">
+          {renderView()}
+        </div>
       </main>
     </div>
   );
