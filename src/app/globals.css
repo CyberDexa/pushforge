@@ -56,12 +56,6 @@
   --sidebar-bg: #07091130;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);

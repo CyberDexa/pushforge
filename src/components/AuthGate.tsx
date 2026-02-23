@@ -18,7 +18,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
 
   if (status === "loading") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0B0E14]">
+      <div className="min-h-screen flex items-center justify-center" style={{ background: "var(--background)" }}>
         <Loader2 className="w-6 h-6 text-forge-400 animate-spin" />
       </div>
     );
@@ -64,28 +64,41 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0B0E14] px-4">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "var(--background)" }}>
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl forge-gradient flex items-center justify-center mx-auto mb-4">
+          <div
+            className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4"
+            style={{
+              background: "linear-gradient(135deg, #FF6B2C 0%, #EA580C 100%)",
+              boxShadow: "0 8px 28px rgba(249,115,22,0.35), 0 0 0 1px rgba(255,107,44,0.2) inset",
+            }}
+          >
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-white">PushForge</h1>
-          <p className="text-sm text-slate-400 mt-1">
+          <p className="text-sm mt-1" style={{ color: "rgba(148,163,184,0.6)" }}>
             {isSignUp ? "Create your account" : "Sign in to continue"}
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="glass-card rounded-2xl p-6 space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="rounded-2xl p-6 space-y-4"
+          style={{
+            background: "rgba(255,255,255,0.035)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
           <div>
-            <label className="block text-xs font-medium text-slate-400 mb-1.5">Email</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "rgba(148,163,184,0.6)" }}>Email</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "rgba(148,163,184,0.4)" }} />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white text-sm focus:outline-none focus:border-forge-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-white text-sm"
                 placeholder="you@example.com"
                 required
               />
@@ -93,14 +106,14 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-400 mb-1.5">Password</label>
+            <label className="block text-xs font-medium mb-1.5" style={{ color: "rgba(148,163,184,0.6)" }}>Password</label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "rgba(148,163,184,0.4)" }} />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700 text-white text-sm focus:outline-none focus:border-forge-500"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl text-white text-sm"
                 placeholder="••••••••"
                 required
                 minLength={6}
@@ -113,7 +126,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-2.5 rounded-xl forge-gradient text-white font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50"
+            className="w-full py-2.5 rounded-xl btn-primary text-white font-semibold text-sm flex items-center justify-center gap-2"
           >
             {submitting ? (
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -125,7 +138,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
             )}
           </button>
 
-          <p className="text-center text-xs text-slate-500">
+          <p className="text-center text-xs" style={{ color: "rgba(148,163,184,0.5)" }}>
             {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
             <button
               type="button"
@@ -133,7 +146,7 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
                 setIsSignUp(!isSignUp);
                 setError("");
               }}
-              className="text-forge-400 hover:underline"
+              className="text-forge-400 hover:underline cursor-pointer"
             >
               {isSignUp ? "Sign in" : "Sign up"}
             </button>
