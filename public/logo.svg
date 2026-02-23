@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="forgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B2C;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF8F5E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4500;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#FFE0CC;stop-opacity:0.9" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="innerShadow">
+      <feOffset dx="0" dy="2"/>
+      <feGaussianBlur stdDeviation="2" result="offset-blur"/>
+      <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
+      <feFlood flood-color="#000" flood-opacity="0.15" result="color"/>
+      <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
+      <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  
+  <!-- Background rounded square -->
+  <rect x="32" y="32" width="448" height="448" rx="80" ry="80" fill="url(#forgeGrad)" filter="url(#innerShadow)"/>
+  
+  <!-- Anvil / Forge shape (stylized) -->
+  <path d="M 160 340 L 160 300 Q 160 270 190 270 L 322 270 Q 352 270 352 300 L 352 340 Q 352 360 332 360 L 180 360 Q 160 360 160 340 Z" fill="rgba(255,255,255,0.15)" />
+  
+  <!-- Upward push arrow (the "Push") -->
+  <g filter="url(#glow)">
+    <!-- Arrow shaft -->
+    <rect x="230" y="180" width="52" height="140" rx="8" fill="url(#arrowGrad)"/>
+    <!-- Arrow head -->
+    <polygon points="256,120 320,210 192,210" fill="url(#arrowGrad)"/>
+  </g>
+  
+  <!-- Spark / forge sparks -->
+  <circle cx="175" cy="200" r="6" fill="#FFD700" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="340" cy="175" r="5" fill="#FFD700" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="155" cy="240" r="4" fill="#FFA500" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="355" cy="225" r="4.5" fill="#FFD700" opacity="0.75">
+    <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="160" r="3.5" fill="#FFF" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.1;0.6" dur="1.3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="310" cy="150" r="3" fill="#FFF" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.7s" repeatCount="indefinite"/>
+  </circle>
+</svg>
