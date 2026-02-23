@@ -2,7 +2,7 @@
 
 > **Last Updated**: 2026-02-23
 
-## Status: Phases 1–6 Complete ✅ — LIVE at pushforge.vercel.app
+## Status: Phases 1–7 Complete ✅ — LIVE at pushforge.vercel.app
 
 ---
 
@@ -66,8 +66,15 @@
 - [x] Production env vars (DATABASE_URL, AUTH_SECRET, NEXT_PUBLIC_AUTH_ENABLED)
 - [x] Live registration + data sync verified against Neon
 
+#### DONE — Phase 7 (Video Studio)
+- [x] VideoJob type + store actions (ADD/UPDATE/DELETE)
+- [x] ElevenLabs voiceover API route (eleven_multilingual_v2 model)
+- [x] D-ID talking head API route (create talk + status polling)
+- [x] VideoStudio component (script input, voice selector, job history, audio player)
+- [x] Sidebar navigation + page router wiring
+- [x] Build, deploy, push
+
 #### NEXT UP
-- [ ] AI video generation (D-ID / ElevenLabs)
 - [ ] Team management & collaboration
 - [ ] Documentation & help center
 - [ ] Stripe monetization (when ready — products, prices, webhook keys)
@@ -93,6 +100,10 @@ pushforge/
 │   │   │   │   ├── twitter/route.ts   # Twitter posting API
 │   │   │   │   ├── linkedin/route.ts  # LinkedIn posting API
 │   │   │   │   └── email/route.ts     # Resend email API
+│   │   │   ├── video/
+│   │   │   │   ├── voiceover/route.ts  # ElevenLabs TTS
+│   │   │   │   ├── talking-head/route.ts # D-ID talking head
+│   │   │   │   └── status/route.ts    # D-ID job polling
 │   │   │   └── billing/
 │   │   │       ├── checkout/route.ts  # Stripe checkout session
 │   │   │       └── webhook/route.ts   # Stripe webhook handler
@@ -110,6 +121,7 @@ pushforge/
 │   │   ├── Templates.tsx   # Template library (built-in + custom)
 │   │   ├── Campaigns.tsx   # Multi-product batch generation
 │   │   ├── Analytics.tsx   # Analytics dashboard
+│   │   ├── VideoStudio.tsx # AI voiceover + talking head video
 │   │   ├── Landing.tsx     # Public marketing landing page
 │   │   └── AuthGate.tsx    # Auth wrapper (NextAuth, skips when unconfigured)
 │   └── lib/
@@ -138,6 +150,8 @@ pushforge/
 - **NextAuth v5** (authentication — credentials + JWT)
 - **bcryptjs** (password hashing)
 - **Stripe** (billing — checkout + webhooks)
+- **ElevenLabs API** (voiceover generation)
+- **D-ID API** (talking head video generation)
 - **localStorage** (offline cache + fallback)
 
 ## Design System
