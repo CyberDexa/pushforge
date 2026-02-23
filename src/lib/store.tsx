@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useReducer, useEffect, useRef, useCallback, type ReactNode, type Dispatch } from "react";
 import { useSession } from "next-auth/react";
-import type { Product, GeneratedContent, AppView, AppState, Template, Campaign, BrandVoice } from "./types";
+import type { Product, GeneratedContent, AppView, AppState, Template, Campaign, BrandVoice, VideoJob } from "./types";
 
 const STORAGE_KEY = "pushforge_state";
 
@@ -21,6 +21,7 @@ const initialState: AppState = {
     includeAlways: [],
     companyName: "",
   },
+  videoJobs: [],
 };
 
 type Action =
@@ -43,6 +44,9 @@ type Action =
   | { type: "UPDATE_CAMPAIGN"; campaign: Campaign }
   | { type: "DELETE_CAMPAIGN"; id: string }
   | { type: "SET_BRAND_VOICE"; brandVoice: BrandVoice }
+  | { type: "ADD_VIDEO_JOB"; job: VideoJob }
+  | { type: "UPDATE_VIDEO_JOB"; job: VideoJob }
+  | { type: "DELETE_VIDEO_JOB"; id: string }
   | { type: "LOAD_STATE"; state: AppState };
 
 function reducer(state: AppState, action: Action): AppState {
@@ -137,6 +141,20 @@ function reducer(state: AppState, action: Action): AppState {
       };
     case "SET_BRAND_VOICE":
       return { ...state, brandVoice: action.brandVoice };
+    case "ADD_VIDEO_JOB":
+      return { ...state, videoJobs: [action.job, ...state.videoJobs] };
+    case "UPDATE_VIDEO_JOB":
+      return {
+        ...state,
+        videoJobs: state.videoJobs.map((j) =>
+          j.id === action.job.id ? action.job : j
+        ),
+      };
+    case "DELETE_VIDEO_JOB":
+      return {
+        ...state,
+        videoJobs: state.videoJobs.filter((j) => j.id !== action.id),
+      };
     case "LOAD_STATE":
       return { ...action.state };
     default:

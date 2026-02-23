@@ -74,6 +74,19 @@ export interface BrandVoice {
   companyName: string;
 }
 
+export interface VideoJob {
+  id: string;
+  scriptContentId?: string;
+  scriptText: string;
+  type: "voiceover" | "talking_head";
+  voiceId: string;
+  status: "pending" | "processing" | "completed" | "failed";
+  resultUrl?: string;
+  error?: string;
+  createdAt: string;
+  completedAt?: string;
+}
+
 export type AppView =
   | "dashboard"
   | "products"
@@ -84,6 +97,7 @@ export type AppView =
   | "templates"
   | "campaigns"
   | "analytics"
+  | "video"
   | "landing";
 
 export interface AppState {
@@ -95,4 +109,5 @@ export interface AppState {
   templates: Template[];
   campaigns: Campaign[];
   brandVoice: BrandVoice;
+  videoJobs: VideoJob[];
 }

@@ -67,11 +67,10 @@
 - [x] Live registration + data sync verified against Neon
 
 #### NEXT UP
-- [ ] Create Stripe products/prices, add real keys to Vercel env
-- [ ] Connect GitHub repo for auto-deploy on push
 - [ ] AI video generation (D-ID / ElevenLabs)
 - [ ] Team management & collaboration
 - [ ] Documentation & help center
+- [ ] Stripe monetization (when ready — products, prices, webhook keys)
 
 ---
 

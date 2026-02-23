@@ -13,6 +13,7 @@ import {
   FileText,
   Megaphone,
   BarChart3,
+  Video,
 } from "lucide-react";
 
 const navSections: { label?: string; items: { view: AppView; label: string; icon: typeof LayoutDashboard }[] }[] = [
@@ -26,6 +27,7 @@ const navSections: { label?: string; items: { view: AppView; label: string; icon
     label: "Create",
     items: [
       { view: "generate", label: "Generate", icon: Sparkles },
+      { view: "video", label: "Video Studio", icon: Video },
       { view: "templates", label: "Templates", icon: FileText },
       { view: "campaigns", label: "Campaigns", icon: Megaphone },
     ],

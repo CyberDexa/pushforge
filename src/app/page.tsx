@@ -14,6 +14,7 @@ import Templates from "@/components/Templates";
 import Campaigns from "@/components/Campaigns";
 import Analytics from "@/components/Analytics";
 import Landing from "@/components/Landing";
+import VideoStudio from "@/components/VideoStudio";
 import { useStore } from "@/lib/store";
 
 function AppContent() {
@@ -39,6 +40,8 @@ function AppContent() {
         return <Campaigns />;
       case "analytics":
         return <Analytics />;
+      case "video":
+        return <VideoStudio />;
       case "landing":
         return <Landing />;
       default:
