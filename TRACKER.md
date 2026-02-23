@@ -2,7 +2,7 @@
 
 > **Last Updated**: 2026-02-23
 
-## Status: Phases 1–5 Complete ✅
+## Status: Phases 1–6 Complete ✅ — LIVE at pushforge.vercel.app
 
 ---
 
@@ -60,10 +60,15 @@
 - [x] Env template (.env.example) + Drizzle config
 - [x] Build verified — zero errors, all 10 routes
 
+#### DONE — Phase 6 (Deploy)
+- [x] Git commit (37 files, 6529 insertions)
+- [x] Vercel CLI deployment (pushforge.vercel.app)
+- [x] Production env vars (DATABASE_URL, AUTH_SECRET, NEXT_PUBLIC_AUTH_ENABLED)
+- [x] Live registration + data sync verified against Neon
+
 #### NEXT UP
-- [ ] Connect real Neon project (create at console.neon.tech, run `npm run db:migrate`)
-- [ ] Create Stripe products/prices, add real IDs to env
-- [ ] Deploy to Vercel (connect repo, set env vars)
+- [ ] Create Stripe products/prices, add real keys to Vercel env
+- [ ] Connect GitHub repo for auto-deploy on push
 - [ ] AI video generation (D-ID / ElevenLabs)
 - [ ] Team management & collaboration
 - [ ] Documentation & help center
