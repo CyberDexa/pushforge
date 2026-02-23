@@ -1,15 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 
 export async function POST(req: NextRequest) {
   try {
-    const { priceId, customerEmail, stripeSecretKey } = await req.json();
-
-    if (!priceId || !stripeSecretKey) {
+    const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+    if (!stripeSecretKey) {
       return NextResponse.json(
-        { error: "Missing priceId or stripeSecretKey" },
+        { error: "Stripe not configured" },
+        { status: 503 }
+      );
+    }
+
+    const { priceId } = await req.json();
+    if (!priceId) {
+      return NextResponse.json(
+        { error: "Missing priceId" },
         { status: 400 }
       );
     }
+
+    // Get authenticated user's email for pre-filling checkout
+    const session = await auth();
+    const customerEmail = session?.user?.email;
 
     const origin = req.headers.get("origin") || "http://localhost:3000";
 
@@ -40,8 +52,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const session = await response.json();
-    return NextResponse.json({ url: session.url });
+    const checkoutSession = await response.json();
+    return NextResponse.json({ url: checkoutSession.url });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Checkout failed" },

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useStore } from "@/lib/store";
 import {
   Sparkles,
@@ -13,6 +14,7 @@ import {
   MessageCircle,
   Mail,
   Megaphone,
+  Loader2,
 } from "lucide-react";
 
 const FEATURES = [
@@ -77,6 +79,7 @@ const PRICING = [
     name: "Pro",
     price: "$29",
     period: "/month",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO || "",
     desc: "For serious content creators",
     features: [
       "Unlimited products",
@@ -96,6 +99,7 @@ const PRICING = [
     name: "Team",
     price: "$79",
     period: "/month",
+    priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_TEAM || "",
     desc: "For agencies & teams",
     features: [
       "Everything in Pro",
@@ -114,6 +118,28 @@ const PRICING = [
 
 export default function Landing() {
   const { dispatch } = useStore();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  async function handleCheckout(priceId: string, planName: string) {
+    if (!priceId) {
+      dispatch({ type: "SET_VIEW", view: "generate" });
+      return;
+    }
+    setLoadingPlan(planName);
+    try {
+      const res = await fetch("/api/billing/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ priceId }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } finally {
+      setLoadingPlan(null);
+    }
+  }
 
   return (
     <div className="animate-fade-in -m-8 min-h-screen">
@@ -296,15 +322,22 @@ export default function Landing() {
                 </ul>
                 <button
                   onClick={() =>
-                    dispatch({ type: "SET_VIEW", view: "generate" })
+                    "priceId" in plan && plan.priceId
+                      ? handleCheckout(plan.priceId, plan.name)
+                      : dispatch({ type: "SET_VIEW", view: "generate" })
                   }
-                  className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                  disabled={loadingPlan === plan.name}
+                  className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2 ${
                     plan.highlight
                       ? "forge-gradient text-white hover:opacity-90"
                       : "bg-slate-800 text-slate-300 border border-slate-700 hover:border-slate-600"
-                  }`}
+                  } disabled:opacity-50`}
                 >
-                  {plan.cta}
+                  {loadingPlan === plan.name ? (
+                    <><Loader2 className="w-4 h-4 animate-spin" /> Redirecting...</>
+                  ) : (
+                    plan.cta
+                  )}
                 </button>
               </div>
             ))}
